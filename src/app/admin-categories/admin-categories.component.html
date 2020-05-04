@@ -1,0 +1,84 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Gestion des categories</div>
+	<div class="panel-body">
+
+		
+		<p></p>
+<div *ngIf="mode=='new-cat'" class="col-md-6" >
+		<form #f="ngForm" (ngSubmit)="saveCategory(f.value)">
+			
+
+				<div class="form-group">
+
+					<label class="control-label">Name </label>
+					<input type="text" name="name" ngModel class="form-control">
+
+					<label class="control-label">Libelle </label>
+					<input type="text" name="libelle" ngModel class="form-control">
+				</div>
+			<button name="Sauvegarder" type="submit" class="btn btn-success">Sauvegarder</button>
+		</form>
+
+		</div>
+		<div *ngIf="mode=='list'">
+		<table class="table" *ngIf="categories" >
+
+			<tr>
+				<th>Name</th>
+				<th>libelle</th>
+			</tr>
+			<tr *ngFor="let c of categories._embedded.categories">
+
+				<td>
+					{{c.name}}
+				</td>
+				<td>
+					{{c.libelle}}
+				</td>
+				<td>
+					<button class="btn btn-danger" (click)="onDeleteCategory(c)">
+						<span class="glyphicon glyphicon-remove">
+
+						</span>
+					</button>
+
+				</td>
+				<td>
+					<button class="btn btn-danger" (click)="onEditCategory(c)">
+						<span class="glyphicon glyphicon-edit">
+
+						</span>
+					</button>
+
+				</td>
+			</tr>
+
+
+		</table>
+		</div>
+		<div *ngIf="mode=='edit-mode'" class="col-md-6" >
+		<form #f="ngForm" (ngSubmit)="putCategory(f.value,currentCategory._links.self.href)">
+			
+
+				<div class="form-group">
+
+					<label class="control-label">Name </label>
+					<input type="text" name="name" ngModel class="form-control" [(ngModel)]="currentCategory.name">
+
+					<label class="control-label">Libelle </label>
+					<input type="text" name="libelle" ngModel class="form-control" [(ngModel)]="currentCategory.libelle">
+				</div>
+			<button name="Sauvegarder" type="submit" class="btn btn-success">Modifier</button>
+		</form>
+
+		</div>
+		<div>
+
+			<button class="btn btn-success" (click)="addCategory()">
+				<span class="glyphicon glyphicon-plus">
+
+				</span>
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Managment Pays </h2>
+  <p>Des escorts dans le monde entier!</p>
+
+  <div *ngIf="mode=='new-country'" class="col-md-6" >
+    <div class="row justify-content-md-center">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+    <form #f="ngForm" class="text-center" [formGroup]="uploadForm"(ngSubmit)="onUpload(f.value)">
+        
+
+            <div class="form-group">
+              
+                
+                <input type="text" formControlName="nomPays" id="nomPays" name="nomPays" placeholder="Nom Pays"
+                 class="form-control" uniqueePays>
+                <div *ngIf="(uploadForm.get('nomPays').touched || uploadForm.get('nomPays').disabled )&& uploadForm.get('nomPays').invalid" class="text-danger">
+                    <div *ngIf="nomPays.errors['required']">
+                        Nom de Pays est obligatoire
+                    </div>
+                    <div *ngIf="nomPays.errors['uniqueePays']">
+                        Nom de Pays existe déjá
+                    </div>
+                </div>
+           
+            </div>
+            <div mdbBtn rounded="true" outline="true" color="info" mdbWavesEffect>
+                <input formControlName="file" type="file" accept=".jpg" (change)= "onFileChanged($event)" appFileValidaator > 
+                <div *ngIf="(uploadForm.get('file').touched || uploadForm.get('file').disabled )&& uploadForm.get('file').invalid" class="text-danger">
+                    <div *ngIf="file.errors['required']">
+                        fichier de format .jpg est obligatoire!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button color="info" [disabled]="uploadForm.invalid"  type="submit"class="btn btn-success">Sauvegarder</button>
+            </div>
+           
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+    </div>
+
+    <div *ngIf="mode=='new-city'" class="col-md-6" >
+        <div class="row justify-content-md-center">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+        <form #f="ngForm" class="text-center" [formGroup]="cityForm" (ngSubmit)="saveCity(f.value)">
+            
+    
+                <div class="form-group">
+                  
+                    
+                    <input type="text" formControlName="nomVille" id="nomVille" name="nomVille" placeholder="Nom Ville" class="form-control" uniqueCity>
+                    <div *ngIf="(cityForm.get('nomVille').touched || cityForm.get('nomVille').disabled )&& cityForm.get('nomVille').invalid" class="text-danger">
+                        <div *ngIf="nomVille.errors['required']">
+                            Nom de Ville est obligatoire
+                        </div>
+                        <div *ngIf="nomVille.errors['uniqueCity']">
+                            Nom de Ville existe déjá
+                        </div>
+                        
+                    </div>
+               
+                </div>
+
+                <div class="form-group">
+                  
+                    
+                    <input type="text" formControlName="codePostal" id="codePostal" name="codePostal" placeholder="Code Postal" class="form-control" uniqueCodePostal>
+                    <div *ngIf="(cityForm.get('codePostal').touched || cityForm.get('codePostal').disabled )&& cityForm.get('codePostal').invalid" class="text-danger">
+                        <div *ngIf="codePostal.errors['required'] && codePostal.touched">
+                           le Code postal est obligatoire
+                        </div>
+                        <div *ngIf="codePostal.errors['uniqueCodePostal']">
+                            code postal existe déjá
+                        </div>
+                        <div *ngIf="codePostal.errors?.pattern">
+                            code postal doit être numérique
+                        </div>
+                        <div *ngIf="codePostal.errors.minlength && codePostal.touched">
+                            code postal doit avoir au minimum 5 chiffres
+                        </div>
+
+                    </div>
+               
+                </div>
+              
+                <div class="col-md-12">
+                    <button color="info" [disabled]="cityForm.invalid"  type="submit"class="btn btn-success">Sauvegarder</button>
+                </div>
+        </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+        </div>
+
+    <div *ngIf="mode=='edit-mode'" class="col-md-6" >
+        <div class="row justify-content-md-center">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+        <form #f="ngForm" class="text-center" [formGroup]="updateForm"(ngSubmit)="putCountry(f.value,currentId)">
+            
+    
+                <div class="form-group">
+                  
+                    
+                    <input type="text" formControlName="nomPaysUpdate" id="nomPaysUpdate" name="nomPaysUpdate" ngModel class="form-control" [(ngModel)]="currentCountry"
+                     class="form-control" uniqueePays>
+                    <div *ngIf="(updateForm.get('nomPaysUpdate').touched || updateForm.get('nomPaysUpdate').disabled )&& updateForm.get('nomPaysUpdate').invalid" class="text-danger">
+                        <div *ngIf="nomPaysUpdate.errors['required']">
+                            Nom de Pays est obligatoire
+                        </div>
+                        <div *ngIf="nomPaysUpdate.errors['uniqueePays']">
+                            Nom de Pays existe déjá
+                        </div>
+                    </div>
+               
+                </div>
+                <div mdbBtn rounded="true" outline="true" color="info" mdbWavesEffect>
+                    <input formControlName="fileUpdate" type="file" accept=".jpg" (change)="onFileChanged($event)">
+                    <div *ngIf="(updateForm.get('fileUpdate').touched || updateForm.get('fileUpdate').disabled )&& updateForm.get('fileUpdate').invalid" class="text-danger">
+                        <div *ngIf="fileUpdate.errors['required']">
+                           modification ! fichier de format .jpg est obligatoire!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button color="info" [disabled]="updateForm.invalid"  type="submit"class="btn btn-success">Modifier</button>
+                </div>
+               
+        </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+        </div>
+
+
+        <div *ngIf="mode=='edit-mode-city'" class="col-md-6" >
+            <div class="row justify-content-md-center">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+            <form #f="ngForm" class="text-center" [formGroup]="cityUpdateForm"(ngSubmit)="putCity(f.value,currentCityId)">
+                
+        
+                    <div class="form-group">
+                      
+                        
+                        <input type="text" formControlName="nomVilleUpdate" id="nomVilleUpdate" name="nomVilleUpdate" ngModel class="form-control" [(ngModel)]="currentCity"
+                         class="form-control" uniqueCity>
+                        <div *ngIf="(cityUpdateForm.get('nomVilleUpdate').touched || cityUpdateForm.get('nomVilleUpdate').disabled )&& cityUpdateForm.get('nomVilleUpdate').invalid" class="text-danger">
+                            <div *ngIf="nomVilleUpdate.errors['required']">
+                                Nom de Ville est obligatoire
+                            </div>
+                            <div *ngIf="nomVilleUpdate.errors['uniqueCity']">
+                                Nom de Ville existe déjá
+                            </div>
+                        </div>
+                   
+                    </div>
+
+                    
+                  
+                    <div class="form-group">
+                  
+                    
+                        <input type="text" formControlName="codePostalUpdate" id="codePostalUpdate" name="codePostalUpdate" ngModel class="form-control" [(ngModel)]="currentCodePostalCity" uniqueCodePostal>
+                        <div *ngIf="(cityUpdateForm.get('codePostalUpdate').touched || cityUpdateForm.get('codePostalUpdate').disabled )&& cityUpdateForm.get('codePostalUpdate').invalid" class="text-danger">
+                            <div *ngIf="codePostalUpdate.errors['required'] && codePostalUpdate.touched">
+                               le Code postal est obligatoire
+                            </div>
+                            <div *ngIf="codePostalUpdate.errors['uniqueCodePostal']">
+                                code postal existe déjá
+                            </div>
+                            <div *ngIf="codePostalUpdate.errors?.pattern">
+                                code postal doit être numérique
+                            </div>
+                            <div *ngIf="codePostalUpdate.errors.minlength && codePostalUpdate.touched">
+                                code postal doit avoir au minimum 5 chiffres
+                            </div>
+    
+                        </div>
+                   
+                    </div>
+                    <div class="col-md-12">
+                        <button color="info" [disabled]="cityUpdateForm.invalid"  type="submit"class="btn btn-success">Modifier</button>
+                    </div>
+                   
+            </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+            </div>
+
+  <div *ngIf="mode=='list'">
+    <div *ngIf=message class="container row">
+        <div class="col-md-12">
+            <div class="alert alert-success"><strong>{{message}}</strong> </div>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-md-8">
+  <table id="countries" class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>nom</th>
+        <th>Icone</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr   *ngFor="let p of pays._embedded.paysList | paginate: { id: 'listing_pagination',
+    itemsPerPage: 5,
+    currentPage: pageCountry,
+    totalItems: totalCountry
+    }" 
+    [ngClass]="{'highlight': selectedId == p.id}"
+    (click)="selectCountry(p,p.id)">
+        <td>{{p.id}}</td>
+        <td>{{p.nomPays}}</td>
+        <td class="py-1"><img [src]=p.iconePays class="rounded-circle" height="10"></td>
+        <td>
+            <button class="btn btn-danger" (click)="onDeleteCountry(p.id)">
+                <span class="glyphicon glyphicon-remove">
+
+                </span>
+            </button>
+
+        </td>
+        <td>
+            <button class="btn btn-danger" (click)="onEditCountry(p.nomPays,p.id)">
+                <span class="glyphicon glyphicon-edit">
+
+                </span>
+            </button>
+
+        </td>
+      </tr>
+    
+     
+    </tbody>
+  </table>
+  <div *ngIf="mode=='list'" class="pagination">
+    <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageCountry=$event"></pagination-controls>
+</div>
+</div>
+
+<div class ="col-md-4" *ngIf="villes!=null">
+    <table class="table" id="cities"> 
+        <thead>
+        <tr class="success" >
+            <th>nom de la ville</th>
+            <th>code postal</th>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr   *ngFor="let v of villes | paginate: { id: 'city_pagination',
+        itemsPerPage: 5,
+        currentPage: pageCity,
+        totalItems: totalCity
+        } ">
+          <td>{{v.nomVille}}</td>
+          <td>{{v.codePostal}}</td>
+          <td>
+              <button class="btn btn-danger" (click)="onDeleteCity(v.id)" >
+                  <span class="glyphicon glyphicon-remove">
+  
+                  </span>
+              </button>
+  
+          </td>
+          <td>
+              <button class="btn btn-danger" (click)="onEditCity(v.nomVille,v.codePostal,v.id)">
+                  <span class="glyphicon glyphicon-edit">
+  
+                  </span>
+              </button>
+  
+          </td>
+        </tr>
+        
+      </tbody>
+     
+    </table>
+    <div  *ngIf="villes!=null" class="pagination">
+        <pagination-controls id="city_pagination" maxSize="5" directionLinks="true" (pageChange)="pageCity=$event"></pagination-controls>
+    </div>
+    <div *ngIf="mode=='list'">
+        <button class="btn btn-success" (click)="addCity()">
+            <span class="glyphicon glyphicon-plus">
+    
+            </span>
+        </button>
+    
+    </div>
+</div>
+</div>
+</div>
+
+<div *ngIf="mode=='list'">
+    <button class="btn btn-success" (click)="addCountry()">
+        <span class="glyphicon glyphicon-plus">
+
+        </span>
+    </button>
+
+</div>
+</div>
+
+</body>
+</html>

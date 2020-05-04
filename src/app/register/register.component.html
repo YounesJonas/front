@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Inscription</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Inscription gratuite - Escort du monde</h2>
+  
+  <div class="row justify-content-md-center">
+    
+</div>
+  <form *ngIf="this.inscriptionReussite===false" #f="ngForm"  class="form-horizontal"  [formGroup]="registerForm" (ngSubmit)="register($event)" >
+
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="firstname">Prénom:</label>
+      <div class="col-sm-10">
+        <input mdbInput type="text" class="form-control"  formControlName="firstname" id="firstname" placeholder="Entrer le Prénom" name="firstname" 
+        [ngClass]="{'is-invalid':registerForm.get('firstname').touched && registerForm.get('firstname').invalid }">
+        <div class="text-danger" *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">
+            <div>
+                le prénom est obligatoire!
+            </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="lastname">Nom:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" id="lastname" formControlName="lastname"  placeholder="Entrer le Nom" name="lastname"
+        [ngClass]="{'is-invalid':registerForm.get('lastname').touched && registerForm.get('lastname').invalid }">
+        <div class="text-danger" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+            <div>
+                le nom est obligatoire!
+            </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="username">Nom d'utilisateur:</label>
+        <div class="col-sm-10">          
+          <input type="text" class="form-control"  formControlName="username"  id="username" placeholder="Entrer le nom d'utilisateur " name="username" uniqueUsername>
+          <div class="text-danger" *ngIf="username.invalid && (username.dirty || username.touched)">
+            <div *ngIf ="username.errors['required']" >le nom d'utilisateur est obligatoire!</div>
+            <div *ngIf ="username.errors['uniqueUsername']">Ce nom d'utilisateur existe déjà </div>
+        
+    </div>
+        </div>
+
+       
+      </div>
+
+
+
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">          
+          <input type="email" class="form-control" formControlName="email" id="email" placeholder="Entrer Email" name="email"
+          [ngClass]="{'is-invalid':registerForm.get('email').touched && registerForm.get('email').invalid }" uniqueMail>
+          <div *ngIf=" registerForm.get('email').touched && registerForm.get('email').invalid"
+          class="text-danger">
+          <div *ngIf="registerForm.get('email').errors.required">
+              un mail est obligatoire!
+          </div>
+          <div *ngIf="registerForm.get('email').errors.email">
+             Veuillez svp Entrer une adresse mail valide !
+          </div>
+          <div *ngIf ="email.errors['uniqueMail']">Cette adresse mail existe déjà </div>
+      </div>
+        </div>
+
+    
+
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2"  for="ville">Choisir une ville:</label>
+        <div class="col-sm-10"> 
+      <select formControlName="ville" id="ville" class="form-control">
+        <option value="" selected disabled>Selectionner une ville</option>
+        <option *ngFor="let v of villes" [ngValue]="v">{{v.nomVille}}</option>
+    </select>
+    <div class="text-danger" *ngIf="ville.invalid && (ville.dirty || ville.touched)">
+        la ville est obligatoire!
+
+     </div>
+        </div>
+
+    
+     </div>
+
+     <div class="form-group">
+        <label   class="control-label col-sm-2" for="sexe">Choisir votre sexe:</label>
+        <div class="col-sm-10">
+        <select formControlName="sexe" class="form-control" id="sexe">
+        <option value="" selected disabled>Selectionner votre sexe</option>
+          <option>Femme</option>
+          <option>Homme</option>
+          <option>Transgenre</option>
+        </select>
+        <div class="text-danger" *ngIf="sexe.invalid && (sexe.dirty || sexe.touched)">
+            la ville est obligatoire!
+    
+         </div>
+         </div>
+      </div>
+     
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="password">Mot de passe:</label>
+        <div class="col-sm-10">          
+          <input type="password" class="form-control" formControlName="password"  id="password" placeholder="Entrer un mot de passe" name="password">
+          <div class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+            le mot de passe est obligatoire !
+ 
+         </div>
+        </div>
+        
+      </div>
+
+
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="password2">Confirmation de mot de passe:</label>
+        <div class="col-sm-10">          
+          <input type="password" class="form-control" formControlName="password2" id="password2" placeholder="Enter password" name="password2">
+          <div class="text-danger"
+          *ngIf="password2.invalid && (password2.dirty || password2.touched)">
+          <div *ngIf="password2.errors['required']">
+              confirmation de passe est obligatoire!
+          </div>
+  
+          <div *ngIf="password2.errors['compare']">
+             les deux mot de passe ne se correspondent pas
+          </div>
+  
+      </div>
+        </div>
+     
+      </div>
+
+
+
+
+
+   
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" color="info" [disabled]="registerForm.invalid" class="btn btn-default">Inscription</button>
+      </div>
+    </div>
+
+  </form>
+  <p class="text-center">Avez-vous un compte?
+    <a [routerLink]="['/login']">Se connecter</a>
+</p>
+</div>
+
+
+<div class="col-sm-offset-2 col-sm-10" *ngIf="this.inscriptionReussite===true" >
+
+  <h2 style="color:green">{{message}}</h2>
+<p class="text-center">Avez-vous reçu le code de confirmation?
+  <a [routerLink]="['/validateMail']">Valider votre inscription</a>
+</p>
+</div>
+
+</body>
+</html>
