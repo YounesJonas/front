@@ -9,6 +9,7 @@ import { Pays } from '../common/models/pays';
 import { FileValidaator } from '../shared/file-validaator.directive';
 import { uniqueCityValidator } from '../shared/unique-city-validator.directive';
 import { uniqueCodePostalValidator } from '../shared/unique-code-postal-validator.directive';
+import { NavbarServiceService } from '../shared/navbar-service.service';
 
 @Component({
   selector: 'app-admin-pays',
@@ -42,9 +43,14 @@ pageCountry:number=1;
 totalCity: number;
 pageCity:number=1;
   constructor(private paysService:PaysService,private route:ActivatedRoute,private router:Router
-    , private fb: FormBuilder) { }
+    , private fb: FormBuilder,
+    public navService: NavbarServiceService
+    ) { }
 
   ngOnInit(): void {
+
+    this.navService.show();
+
     this.uploadForm = this.fb.group(
       {
         nomPays: ['', Validators.required,uniquePaysValidator(this.paysService)],

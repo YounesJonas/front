@@ -9,6 +9,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AdminPaysComponent } from './admin-pays/admin-pays.component';
 import { RegisterComponent } from './register/register.component';
 import {ValidationInscriptionComponent} from './validation-inscription/validation-inscription.component';
+import { AboutUsComponentComponent } from './about-us-component/about-us-component.component';
 
 const routes: Routes = [
   {path:"products/:urlProds" , component:ProductsComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path:"logout" , component:LogoutComponent},
   {path:"adminPays" , component:AdminPaysComponent},
   {path:"register" , component:RegisterComponent},
-  {path:"validateMail" , component:ValidationInscriptionComponent}
+  {path:"validateMail" , component:ValidationInscriptionComponent},
+  {path:"aboutUs" , component:AboutUsComponentComponent}
 
 ];
 

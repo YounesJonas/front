@@ -31,7 +31,7 @@ export class AuthenticationComponent implements OnInit {
         console.log(resp.headers.get('Authorization'));
         let jwt = resp.headers.get('Authorization');
         this.authentService.saveToken(jwt);
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/aboutUs");
       }, err => {
         console.log(err);
       })

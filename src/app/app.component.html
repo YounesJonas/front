@@ -1,36 +1,7 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Escort Girl</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown" *ngIf="isAuthenticated()">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li *ngIf="isAdmin()"><a routerLink="/adminPays">Managment Pays</a></li>
-          <li *ngIf="isAdmin()"><a routerLink="/adminCategories">Managment Categories</a></li>
-          <li *ngIf="isUser()"><a routerLink="/adminProducts">Managment Products</a></li>
-          <li *ngIf="isAdmin()"><a routerLink ="/adminUsers">Managment Users</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav pull-right">
-      <li>
-        <a *ngIf="!isAuthenticated()" routerLink="/login" >Login </a>
-        <a class ="btn" *ngIf="isAuthenticated()" (click)="logout()">Logout </a>
-      </li>
-    </ul>
+<div *ngIf="isAuthenticated()" class="mat-app-background basic-container">
+    <app-nav>loading</app-nav>
   </div>
-</nav>
-<div class ="row">
 
-
-
-<div class="col-md-9">
- <router-outlet>
+<router-outlet>
 
  </router-outlet>
-</div>
-</div>
