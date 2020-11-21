@@ -1,0 +1,14 @@
+.mat-dialog-title {
+    color: blue;
+}
+.mdc-button--raised{
+    color: ghostwhite;
+    background: blue;
+    position: relative;
+    left: 70px;
+}
+
+.col-md-8{
+    left: 100px;
+    position: relative;
+}

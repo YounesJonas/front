@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Administration Des Nationalités</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<app-nav></app-nav>
+<div class="container" *ngIf="authentifie==true">
+  <h2>Managment Nationalité </h2>
+  <p>Des escorts dans le monde entier!</p>
+
+  <div *ngIf="mode=='new-country'" class="col-md-6" >
+    <div class="row justify-content-md-center">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+    <form #f="ngForm" class="text-center" [formGroup]="uploadForm"(ngSubmit)="saveNationalite(f.value)">
+        
+
+            <div class="form-group">
+              
+                
+                <input type="text" formControlName="nationalite" id="nationalite" name="nationalite" placeholder="la Nationalité"
+                 class="form-control" uniqueePays>
+                <div *ngIf="(uploadForm.get('nationalite').touched || uploadForm.get('nationalite').disabled )&& uploadForm.get('nationalite').invalid" class="text-danger">
+                    <div *ngIf="nationalite.errors['required']">
+                       la Nationalité est obligatoire!
+                    </div>
+                    <div *ngIf="nationalite.errors['uniqueNationalite']">
+                        cette nationalité existe déjà dans la base de données
+                    </div>
+                </div>
+           
+            </div>
+            <div class="col-md-12">
+                <button color="info" [disabled]="uploadForm.invalid"  type="submit"class="btn btn-success">Sauvegarder</button>
+            </div>
+           
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+    </div>
+
+
+    <div *ngIf="mode=='edit-mode'" class="col-md-6" >
+        <div class="row justify-content-md-center">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+        <form #f="ngForm" class="text-center" [formGroup]="updateForm"(ngSubmit)="putNationalite(currentNationaliteId)">
+            
+    
+                <div class="form-group">
+                  
+                    
+                    <input type="text" formControlName="nationaliteUpdate" id="nationaliteUpdate" name="nationaliteUpdate" ngModel class="form-control" [(ngModel)]="currentNationalite"
+                     class="form-control" uniqueNationalite>
+                    <div *ngIf="(updateForm.get('nationaliteUpdate').touched || updateForm.get('nationaliteUpdate').disabled )&& updateForm.get('nationaliteUpdate').invalid" class="text-danger">
+                        <div *ngIf="nationaliteUpdate.errors['required']">
+                           la Nationalité est obligatoire
+                        </div>
+                        <div *ngIf="nationaliteUpdate.errors['uniqueNationalite']">
+                            Cette nationalité existe déjá
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="col-md-12">
+                    <button color="info" [disabled]="updateForm.invalid"  type="submit"class="btn btn-success">Modifier</button>
+                </div>
+               
+        </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+        </div>
+
+
+  <div *ngIf="mode=='list'">
+    <div *ngIf=message class="container row">
+        <div class="col-md-12">
+            <div class="alert alert-success"><strong>{{message}}</strong> </div>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-md-8">
+  <table id="countries" class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Nationalite</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let n of nationalites._embedded.nationaliteList | paginate: { id: 'listing_pagination',
+      itemsPerPage: 5,
+      currentPage: pageNationalite,
+      totalItems: totalNationalite
+      }" 
+      [ngClass]="{'highlight': selectedNationaliteId == n.id}"
+      (click)="selectNationalite(n,n.id)">
+        <td>{{n.id}}</td>
+        <td>{{n.nationalite}}</td>
+        <td>
+            <button class="btn btn-danger" (click) = "onDeleteNationalite(n.id)">
+                <span class="glyphicon glyphicon-remove">
+
+                </span>
+            </button>
+
+        </td>
+        <td>
+            <button class="btn btn-danger" (click)="onEditNationalite(n.nationalite,n.id)" >
+                <span class="glyphicon glyphicon-edit">
+
+                </span>
+            </button>
+
+        </td>
+      </tr>
+    
+     
+    </tbody>
+  </table>
+  <div *ngIf="mode=='list'" class="pagination">
+    <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pageNationalite=$event"></pagination-controls>
+</div>
+</div>
+
+</div>
+</div>
+
+<div *ngIf="mode=='list'">
+    <button class="btn btn-success" (click)="addCountry()">
+        <span class="glyphicon glyphicon-plus">
+
+        </span>
+    </button>
+
+</div>
+</div>
+<div *ngIf="authentifie==false">
+ Vous n'êtes pas connecté(e)s, Veuillez vous Authentifier sur<a mat-button  routerLink="/login" color ='accent'>Login</a>
+</div>
+</body>
+</html>

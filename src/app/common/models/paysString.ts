@@ -1,6 +1,6 @@
-import { Abstract } from './Abstract';
 
-export class PaysString extends Abstract{
+
+export class PaysString{
     public nomPays: String;
 
     getNomPays = () =>{

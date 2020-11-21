@@ -1,3 +1,14 @@
 
-html, body { height: 100%; }
+html, body { height: 100%;
+    background-image: url('http://getwallpapers.com/wallpaper/full/b/6/c/293708.jpg');
+    background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.controles-container{
+    width: 100%;
+    padding: 5%;
+}

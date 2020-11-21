@@ -1,0 +1,96 @@
+<html>
+    
+    <head>
+      <head>
+        <title>Bootstrap Card</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      </head>
+    </head>
+    <body>
+        <app-nav>
+        
+        </app-nav>
+        <div *ngIf="isClient==true && isSame==true ">
+        <mat-card>
+            <mat-card-content>
+              <h2 class="accent">Réservation Terminée</h2>
+          
+              <section class="example-section">
+                <mat-progress-bar
+                    class="example-margin"
+                    color= "primary"
+                    mode="determinate"
+                    value=100
+                    >
+                    
+                </mat-progress-bar>
+                
+              </section>
+        
+              
+            </mat-card-content>
+          </mat-card>
+
+
+          <div class="card bg-success text-white">
+            <div class="card-body">Félicitation! Votre demande de rendez-vous est confirmé.</div>
+          </div>
+
+          <div class="container">
+
+            <p>       </p>
+                <p><strong>Note:</strong> Vous pouvez suivre l'état de la demande avec l'id de la réservation suivant:  <strong>{{this.idDemandeReservation}}</strong></p>
+                <p>              </p>
+
+            <div class="card bg-info text-white">
+                <div class="card-body">
+
+
+                    <h4 class="card-title">Adresse de la rendez-vous</h4>
+                            <p class="card-text">405 E montée Maxcence Guès Eguilles 13510 France</p>
+                            
+                            </div>
+                            <div class="card-body">
+                              <h4 class="card-title">l'heure de début de rendez-vous</h4>
+                              <p class="card-text">{{reservationInfo.start}}</p>
+                              </div>
+                              <div class="card-body">
+                                <h4 class="card-title">l'heure de fin de rendez-vous</h4>
+                                <p class="card-text">{{reservationInfo.end}}</p>
+                                </div>
+                                <div class="card-body">
+                                  <h4 class="card-title">Tarif</h4>
+                                  <p class="card-text">{{reservationInfo.tarif}} €</p>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">RENDEZ-VOUS DEMANDÉ AVEC SUCCÈS</h4>
+                                    
+                                    </div>
+
+                </div>
+                <section>
+                  
+                    <div class="example-button-row">
+                      
+                      <button mat-raised-button (click)="terminer()" color="accent">Terminer</button>
+                      
+                    </div>
+                  </section>
+              </div>
+
+            </div>
+            <div *ngIf="isClient==false">
+                Vous n'êtes pas connecté(e)s, Veuillez vous Authentifier sur<a mat-button  (click)="goAuth()" color ='accent'>Login</a>
+               </div>
+               <div *ngIf="isClient==true && isSame==false ">
+              Veuillez terminer la réservation svp!  <a mat-button  (click) = "reload()" color ='accent'>Ma Réservation</a>
+               </div>
+
+    </body>
+    
+    </html>

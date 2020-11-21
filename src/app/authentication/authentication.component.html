@@ -15,7 +15,6 @@
     <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-	
 </head>
 <body>
 <div class="container">
@@ -61,7 +60,11 @@
 					<div class="form-group">
 						<button type="submit" [disabled]="form.invalid" class="btn float-right login_btn"> Login </button>
 					</div>
-				</form>
+					</form>
+
+					<div *ngIf="message.length>0"  class="d-flex justify-content-center links">
+						<i class="material-icons">error</i>	 Nom d'utilisateur ou mot de passe incorrect !	
+					</div>
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">

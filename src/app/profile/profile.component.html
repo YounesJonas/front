@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mon Profil</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<app-nav></app-nav>
+<div class="row">
+<div class="col-md-4"> 
+    <div id="table_left">
+        <div class="icon-text">
+            <mat-icon color="primary">perm_contact_calendar</mat-icon> <span style="
+            left: 20;
+            left: 10px;
+            color: mediumblue;
+            position: relative;
+            right: 0px;
+            "
+        
+            
+            >Informations Personnelles </span> 
+            
+        </div>
+        
+        <table class="table table-striped">
+           
+            <tbody>
+                <tr>
+                    <th scope="row">Username</th>
+                    <td>{{this.username}}</td>
+                  </tr>
+              <tr>
+                <th scope="row">Sexe</th>
+                <td>{{myEscort.sexe}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Nationalité</th>
+                <td>{{myEscort.nationalite}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Âge</th>
+                <td>{{myEscort.age}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Yeux</th>
+                <td>{{myEscort.yeux}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Taille</th>
+                <td> {{myEscort.taille}} cm</td>
+              </tr>
+              <tr>
+                <th scope="row">Poids</th>
+                <td>{{myEscort.poids}} kg</td>
+              </tr>
+              <tr>
+                <th scope="row">Cheveux</th>
+                <td>{{myEscort.cheveux}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="icon-text">
+            <mat-icon color="primary">perm_contact_calendar</mat-icon> <span style="
+            left: 20;
+            left: 10px;
+            color: mediumblue;
+            position: relative;
+            right: 0px;
+            "
+            >Détails Sexuels </span> 
+         
+        </div>
+        <table class="table table-striped">
+           
+            <tbody>
+              <tr>
+                <th scope="row">Orientation sexuelle</th>
+                <td>{{myEscort.orientationSexuelle}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="icon-text">
+            <mat-icon color="primary">perm_contact_calendar</mat-icon> <span style="
+            left: 20;
+            left: 10px;
+            color: mediumblue;
+            position: relative;
+            right: 0px;
+            ">À propos de moi </span> 
+           
+        </div>
+        <table class="table table-striped">
+           
+            <tbody>
+              <tr>
+                
+                <td>
+                    
+                    <!--p>
+                    GFE française câline et coquine... 
+
+                    JE RECOIS 
+                    HYERES port mercredi 3 juin 
+                    MARSEILLE la valentine mercredi 10 juin
+                    MARSEILLE vieux port mercredi 17 juin
+                    FUVEAU / ROUSSET mercredi 24 juin
+                    MARSEILLE vieux port mercredi 01 juillet
+                    
+                    
+                   
+                </p-->
+                <p>
+                  {{myEscort.aProposDeMoi}}
+                </p>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class = "col-md-4">
+    <div class="icon-text">
+        <mat-icon color="primary">email</mat-icon> <span style="
+        left: 20;
+            left: 10px;
+            color: mediumblue;
+            position: relative;
+            right: 0px;" >Coordonnées </span>  
+            
+          </div>
+
+          <table class="table table-striped">
+           
+            <tbody>
+              <tr>
+                <th scope="row">Ville</th>
+                <td>{{myEscort.nomVille}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Numéro de téléphone</th>
+                <td>{{myEscort.numeroTel}}</td>
+              </tr>
+              <tr>
+                <th scope="row">E-mail</th>
+                <td>{{myEscort.mail}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Site web/url</th>
+                <td>{{myEscort.siteUrl}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="icon-text">
+            <mat-icon color="primary">today</mat-icon>
+            <span style="
+      left: 20;
+          left: 10px;
+          color: mediumblue;
+          position: relative;
+          right: 0px;" >Planning et Disponibilité </span> 
+        </div>
+          <div class="app-calendar">
+            <full-calendar #fullcalendar  defaultView="dayGridDay"  [options]="calendarOptions" ></full-calendar>
+          </div>
+</div>
+<div class = "col-md-4">
+    <div class="icon-text">
+        <mat-icon color="primary">camera_alt</mat-icon> <span style="left: 20;
+        left: 10px;
+        color: mediumblue;
+        position: relative;
+        right: 0px;
+        ">Galerie </span> 
+       
+          </div>
+      <div>
+        <table class="table">
+          <tbody>
+            <tr *ngFor="let pic of myEscort.pictures | paginate: { id: 'listing_pagination',
+            itemsPerPage: 2,
+            currentPage: pagePicture,
+            totalItems: totalPictures
+            }" >
+              <td class="py-1"><img [src]=pic.picture class="rounded-circle" width="320" height="270"></td>
+              <td>
+                
+    
+            </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="pagePicture=$event"></pagination-controls>
+      </div>
+      </div>    
+</div>
+</div>
+
+</body>
+</html>
+
+
+

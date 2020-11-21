@@ -1,0 +1,143 @@
+<html>
+    <head></head>
+    <body>
+        <app-nav>
+        
+        </app-nav>
+        <div class="row"  *ngIf="authentifie==true && isAdmin==false && theSame==true ">
+            <mat-card>
+                <mat-card-content>
+                  <h2 class="accent">Demandes de Rendez-vous</h2>
+              
+                  <section class="example-section">
+                    <mat-progress-bar
+                        class="example-margin"
+                        color= "accent"
+                        mode="determinate"
+                        value=100
+                        >
+                        
+                    </mat-progress-bar>
+                    
+                  </section>
+            
+                </mat-card-content>
+              </mat-card>
+
+              <mat-card class="example-card">
+                <mat-accordion class="example-headers-align">
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-description>
+                        <mat-icon>date_range</mat-icon>
+                           Mes disponibilités
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                  
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                <th scope="row">#</th>
+                                <th scope="row">Titre</th>
+                                <th scope="row">Date de Début</th>
+                                <th scope="row">Date de Fin</th>
+                                <th scope="row">Statut</th>
+                              </tr>
+                            </thead>
+                              <tbody>
+                              <tr *ngFor="let e of this.events | paginate:{id: 'listing_pagination',
+                              itemsPerPage: 3,
+                              currentPage: pageEvent,
+                              totalItems: totalEvents
+                            }">
+                                
+                                <td>{{e.id}}</td>
+                                <td>{{e.title}}</td>
+                                <td>{{e.start}}</td>
+                                <td>{{e.end}}</td>
+                                <td>{{e.color}}</td>
+                                
+                              </tr>
+                              
+                          </tbody>
+                      </table>
+                      <div  class="pagination">
+                        <pagination-controls id="listing_pagination" maxSize="3" directionLinks="true" (pageChange)="pageEvent=$event"></pagination-controls>
+                    </div>
+                  <!-- #docregion action-bar -->
+                      <mat-action-row>
+                        <button mat-button color="primary" (click)="nextStep()">Suivant</button>
+                      </mat-action-row>
+                  <!-- #enddocregion action-bar -->
+                    </mat-expansion-panel>
+                  
+                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-description>
+                            <mat-icon>map</mat-icon>
+                          Demandes de rendez-vous
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                  
+                      <table class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th scope="row">#</th>
+                              <th scope="row">Demandeur</th>
+                              <th scope="row">Photo</th>
+                              <th scope="row">Date de Début</th>
+                              <th scope="row">Date de Fin</th>
+                              <th scope="row">Tarif</th>
+                              <th scope="row">Statut</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            <tr *ngFor="let r of this.requests | paginate:{id: 'listing_pagination_2',
+                            itemsPerPage: 3,
+                            currentPage: pageRequest,
+                            totalItems: totalRequests
+                          }">
+                              <td>{{r.id}}</td>
+                              <td>{{r.firstName}} {{r.lastName}}</td>
+                              <td class="py-1"><img [src]=r.photo class="rounded-circle" style="width:200px;height:220px;"></td>
+                              <td>{{r.start}}</td>
+                              <td>{{r.end}}</td>
+                              <td>{{r.tarif}} €</td>
+                              <td>{{r.status}}</td>
+                              <td *ngIf=" r.status==='demandee'" ><button mat-raised-button color="accent" (click)="repondre(r.id)" >Répondre</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div  class="pagination">
+                        <pagination-controls id="listing_pagination_2" maxSize="3" directionLinks="true" (pageChange)="pageRequest=$event"></pagination-controls>
+                    </div>
+                    <mat-action-row>
+                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              
+                      </mat-action-row>
+                    </mat-expansion-panel>
+                  
+                    
+                      
+                    
+
+                    
+                  
+                  </mat-accordion>
+                  
+                  
+                  
+              </mat-card>
+              
+        </div>
+        <div *ngIf="authentifie==false">
+            Vous n'êtes pas connecté(e)s, Veuillez vous Authentifier sur<a mat-button  routerLink="/login" color ='accent'>Login</a>
+           </div>
+           <div *ngIf="authentifie==true && isAdmin==true">
+            Vous êtes Admin, Veuillez vous rediriger vers la plateforme de l'administration <a mat-button  routerLink="/adminPays" color ='accent'>Admin</a>
+           </div>
+           <div *ngIf="authentifie==true && isAdmin==false && theSame==false ">
+          Vous ne pouvez pas modifier ce profil, Vous pouvez consulter et modifer votre   <a mat-button  (click) = "reload()" color ='accent'>Profil</a>
+           </div>
+    </body>
+

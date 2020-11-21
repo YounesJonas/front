@@ -1,11 +1,33 @@
-<mat-toolbar  >
+<mat-toolbar color="accent">
 <span class="example-fill-remaining-space">
-   <mat-icon>shopping_cart</mat-icon>Escort Girl</span>
-   
-<a mat-button>Home</a>
-<a mat-button routerLink="adminPays">Administration</a>
-<a mat-button>Services</a>
-<a mat-button>Projets</a>
-<a mat-button routerLink="aboutUs" >About Us </a>
-<a mat-raised-button  routerLink="login" color='accent'>Sign up</a>
+   <mat-icon>shopping_cart</mat-icon>Escort Girl<i class="fa fa-cross-circle-right fa-lg" (click)="goProfiles()"></i></span>
+<button mat-button *ngIf="authentifie==true" (click)="logout()" >Logout</button>   
+<a mat-button routerLink="/profiles">Home</a>
+<button *ngIf="admin==true" mat-button [matMenuTriggerFor]="menu">Admin</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/adminPays" >Pays et Ville</button>
+  <button mat-menu-item routerLink="/adminNationalite" >Nationalité</button>
+  <button mat-menu-item>Escort</button>
+</mat-menu>
+
+<a mat-button  *ngIf="authentifie==true && isClient==false && admin==false" [mat-menu-trigger-for]="menuAppointments" >Services</a>
+<mat-menu #menuAppointments="matMenu">
+<button mat-menu-item (click)="goDisponibilites()" > Mes disponibilités</button>
+</mat-menu>
+<a mat-button  *ngIf="authentifie==true" >Projets</a>
+<a mat-button routerLink="/aboutUs" >About Us </a>
+<a mat-button *ngIf="authentifie==false" routerLink="/login" color ='primary'>Login</a>
+<a mat-button *ngIf="authentifie==false" [mat-menu-trigger-for]="menuSignUp"  color='primary'>Sing up</a>
+<mat-menu #menuSignUp="matMenu">
+  <button mat-menu-item routerLink="/register" >Escort</button>
+  <button mat-menu-item routerLink="/registerClient" >Client</button>
+</mat-menu>
+<button *ngIf="authentifie==true" color="primary"  mat-button [matMenuTriggerFor]="menuLogin">Hello {{username}}</button>
+<!-- #enddocregion mat-menu-trigger-for -->
+<mat-menu #menuLogin="matMenu">
+  <button mat-menu-item *ngIf="admin==false && isClient==false" (click)="editMyprofile()">Modifier mon Profil</button>
+  <button mat-menu-item *ngIf="admin==false && isClient==true" (click)="editClientProfile()">Afficher mon Profil</button>
+  <button mat-menu-item *ngIf="admin==true" (click)="goToAdminPage()">Admin Pays et villes</button>
+</mat-menu>
 </mat-toolbar>
+

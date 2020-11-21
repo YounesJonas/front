@@ -1,0 +1,141 @@
+<html>
+    <head></head>
+    <body>
+        <app-nav>
+        
+        </app-nav>
+        <div>
+            <mat-card>
+                <mat-card-content>
+                  <h2 class="accent">Réservation</h2>
+              
+                  <section class="example-section">
+                    <mat-progress-bar
+                        class="example-margin"
+                        color= "primary"
+                        mode="determinate"
+                        value=20
+                        >
+                        
+                    </mat-progress-bar>
+                    
+                  </section>
+            
+                </mat-card-content>
+              </mat-card>
+
+              <mat-card class="example-card">
+                <mat-accordion class="example-headers-align">
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-description>
+                        <mat-icon>account_circle</mat-icon>
+                           Informations Escort
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                  
+                      <table class="table table-striped">
+                          <tbody>
+                              <tr>
+                                <th scope="row">Username</th>
+                                <td>{{reservationInfo.username}}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Sexe</th>
+                                <td>{{reservationInfo.sexe}}</td>
+                              </tr>
+                              <tr>
+                              <th scope="row">Orientation sexuelle</th>
+                                 <td>{{reservationInfo.orientationSexuelle}}</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                  <!-- #docregion action-bar -->
+                      <mat-action-row>
+                        <button mat-button color="primary" (click)="nextStep()">Suivant</button>
+                      </mat-action-row>
+                  <!-- #enddocregion action-bar -->
+                    </mat-expansion-panel>
+                  
+                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-description>
+                            <mat-icon>map</mat-icon>
+                          Lieu de rendez-vous
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                  
+                      <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                              <th scope="row">Adresse</th>
+                              <td>13 rue la république Marseille 13100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  
+                      <mat-action-row>
+                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                        <button mat-button color="primary" (click)="nextStep()">Suivant</button>
+                      </mat-action-row>
+                    </mat-expansion-panel>
+                  
+                    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-description>
+                                <mat-icon>date_range</mat-icon>
+                                Date de la réservation
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                      
+                          <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                  <th scope="row">Date/heure de début</th>
+                                  <td>{{reservationInfo.start}}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Date/heure de Fin</th>
+                                  <td>{{reservationInfo.end}}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                      
+                    
+                        <mat-action-row>
+                          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                          <button mat-button color="primary" (click)="nextStep()">Suivant</button>
+                        </mat-action-row>
+                      </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-description>
+                                <mat-icon>euro_symbol</mat-icon>
+                              Tarif
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                      
+                          <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                  <th scope="row">Tarif</th>
+                                  <td>{{reservationInfo.tarif}} €</td>
+                                </tr>
+                            </tbody>
+                        </table>
+  
+                      <mat-action-row>
+                        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                        <button mat-button color="primary" (click)="validate()">Fin</button>
+                      </mat-action-row>
+                    </mat-expansion-panel>
+                  
+                  </mat-accordion>
+                  
+                  
+                  
+              </mat-card>
+        </div>
+    </body>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+  <app-nav></app-nav>
+<h2 style="text-align:center">Profile Client</h2>
+
+<div class="card">
+  <div *ngIf="isClient==true && isSame==true ">
+    <img [src]=myClient.picture.picture alt={{myClient.firstname}} style="width:100%">
+  <h1>{{myClient.firstname}} {{myClient.lastname}}</h1>
+  <p class="title">{{myClient.age}} ans</p>
+   <p><mat-icon> email</mat-icon> {{myClient.mail}}</p>
+  <div style="margin: 24px 0;">
+    <a href={{this.urlInsta}}> <i class="fa fa-instagram"></i></a> 
+    <a href={{this.urlFace}}><i class="fa fa-facebook"></i></a> 
+  </div>
+  
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+        <mat-icon>date_range</mat-icon>
+           Mes Demandes de RDV
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th scope="row">#</th>
+                <th scope="row">Escort</th>
+                <th scope="row">Photo</th>
+                <th scope="row">Date de Début</th>
+                <th scope="row">Date de Fin</th>
+                <th scope="row">Tarif</th>
+                <th scope="row">Statut</th>
+              </tr>
+            </thead>
+              <tbody>
+              <tr *ngFor="let e of this.requests | paginate:{id: 'listing_pagination',
+              itemsPerPage: 3,
+              currentPage: pageEvent,
+              totalItems: totalEvents
+            }">
+                
+                <td>{{e.id}}</td>
+                <td>{{e.firstName}} {{e.lastName}}</td>
+                <td class="py-1"><img [src]=e.photo class="rounded-circle" style="width:200px;height:220px;"></td>
+                <td>{{e.start}}</td>
+                <td>{{e.end}}</td>
+                <td>{{e.tarif}} €</td>
+                <td>{{e.status}}</td>
+                <td *ngIf=" e.status==='acceptee'" ><button mat-raised-button color="accent" (click)="payer(e.id)" >Payment</button></td>
+              </tr>
+              
+          </tbody>
+      </table>
+      <div  class="pagination">
+        <pagination-controls id="listing_pagination" maxSize="3" directionLinks="true" (pageChange)="pageEvent=$event"></pagination-controls>
+    </div>
+  <!-- #enddocregion action-bar -->
+    </mat-expansion-panel>
+  
+  
+    
+      
+    
+
+    
+  
+  </mat-accordion>
+</div>
+<div *ngIf="isClient==false">
+  Vous n'êtes pas connecté(e)s, Veuillez vous Authentifier sur<a mat-button  routerLink="/login" color ='accent'>Login</a>
+ </div>
+ <div *ngIf="isClient==true && isSame==false ">
+Vous ne pouvez pas consulter ce profil, Vous pouvez consulter le votre   <a mat-button  (click) = "reload()" color ='accent'>Profil</a>
+ </div>
+  </div>
+  
+
+</body>
+</html>

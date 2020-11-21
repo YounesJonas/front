@@ -1,0 +1,45 @@
+<html lang="fr">
+    <head>
+
+    </head>
+    <style>
+        span{
+            height: 45px;
+display: grid;
+align-items: center;
+        }
+    </style>
+    <body>
+        <app-nav></app-nav>
+        
+        <div class="container" *ngIf="escorts">
+            
+            <div class="hmessage" style="margin:0 10px; padding:4px;">
+                <h3>{{this.nombreEscorts}} Escort(s) disponible</h3>
+            </div>
+            <div
+              class="row justify-content-around align-items-center"
+              Style="height: 80vh; width:100%"
+            >
+              <div class="col-lg-3 col-md-6 col-sm-12 border m-3" style="height:40vh"
+                *ngFor="let e of escorts | paginate: { id: 'listing_pagination',
+                itemsPerPage: 8,
+                currentPage: pageEscort,
+                totalItems: nombreEscorts
+                }">
+              <div *ngIf="e.pictures" >
+                      <a href="/profiles/{{e.username}}">
+                        <img class="img-rounded" src="{{ e.pictures[0].picture }}" alt="" width="250" height="200"  />
+                    </a>
+              </div>
+                   <a href="/profiles/{{e.username}}">
+                   <span>{{e.username}}</span>
+                   </a>
+              </div>
+            </div>
+            <div  class="pagination">
+                <pagination-controls id="listing_pagination" maxSize="8" directionLinks="true" (pageChange)="pageEscort=$event"></pagination-controls>
+            </div>
+          </div>
+    </body>
+</html>

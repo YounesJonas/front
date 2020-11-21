@@ -1,0 +1,213 @@
+<div  *ngIf="data.mode=='infoPerso'">
+  <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span> Modification Informations Personnelles </span>
+  </mat-toolbar>
+  <form #f="ngForm" [formGroup]="infoPersoForm" (ngSubmit)="save(f.value)">
+
+    <div>
+    <mat-form-field>
+      <input matInput type="text"  title="Taille" formControlName="taille" id="taille" name="taille" placeholder="Votre Taille en cm !"
+      min="100" max="250"
+      [ngClass]="{'is-invalid':infoPersoForm.get('taille').touched && infoPersoForm.get('taille').invalid }"
+      >
+      <mat-hint *ngIf="taille.hasError('required')">la taille est obligatoire!</mat-hint>
+      <mat-hint *ngIf ="taille.hasError('min')">la taille minimale est 100 cm!</mat-hint>
+      <mat-hint *ngIf ="taille.hasError('max')">la taille maximale est 250 cm!</mat-hint>
+      <mat-hint *ngIf ="taille.hasError('pattern')">la taille est un nombre entier compris entre 100 et 250!</mat-hint>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput type="text"  title="Poids" formControlName="poids" id="poids" name="poids" placeholder="Votre Poids en Kg !"
+      min="30" max="150"
+      [ngClass]="{'is-invalid':infoPersoForm.get('poids').touched && infoPersoForm.get('poids').invalid }"
+      >
+      <mat-hint *ngIf="poids.hasError('required')">le poids est obligatoire!</mat-hint>
+      <mat-hint *ngIf ="poids.hasError('min')">le poids minimal est 30 Kg!</mat-hint>
+      <mat-hint *ngIf ="poids.hasError('max')">le poids maximal est 150 Kg!</mat-hint>
+      <mat-hint *ngIf ="poids.hasError('pattern')">le poids doit être un nombre entier entre 30 et 150</mat-hint>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </div>
+  
+  <div>
+    <mat-form-field>
+      <mat-select matInput type="text"  title="yeux" formControlName="yeux" id="yeux" name="yeux" placeholder="Couleur de vos yeux !"
+      [ngClass]="{'is-invalid':infoPersoForm.get('yeux').touched && infoPersoForm.get('yeux').invalid }"
+      >
+      <mat-option value="marron">Marron</mat-option>
+        <mat-option value="verts">Verts</mat-option>
+        <mat-option value="bleus">Bleus</mat-option>
+        <mat-option value="noirs">Noirs</mat-option>
+        <mat-option value="violets">Violets</mat-option>
+        <mat-option value="gris">Gris</mat-option>
+      </mat-select>
+      <mat-hint *ngIf="yeux.invalid && (yeux.dirty || yeux.touched)">la couleur des yeux est obligatoire!</mat-hint>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-select matInput type="text"  title="cheveux" formControlName="cheveux" id="cheveux" name="cheveux" placeholder="Couleur de vos cheveux !"
+      [ngClass]="{'is-invalid':infoPersoForm.get('cheveux').touched && infoPersoForm.get('cheveux').invalid }"
+      >
+      <mat-option value="noir">Noir</mat-option>
+      <mat-option value="brun">Brun</mat-option>
+      <mat-option value="chatinFonce">Châtin foncé</mat-option>
+      <mat-option value="chatin">Châtin</mat-option>
+      <mat-option value="chatinClair">Châtin clair</mat-option>
+      <mat-option value="blondFonce">blond foncé</mat-option>
+      <mat-option value="blondMoyen">blond moyen</mat-option>
+      <mat-option value="blondClair">blond clair</mat-option>
+      <mat-option value="blondTresClair">blond très clair</mat-option>
+      <mat-option value="blondPlatine">blond platine</mat-option>
+      </mat-select>
+      <mat-hint *ngIf="cheveux.invalid && (cheveux.dirty || cheveux.touched)">la couleur des cheveux est obligatoire!</mat-hint>
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="infoPersoForm.invalid">Valider</button>
+  </div>
+  </form>
+ 
+</div>
+
+
+<div  *ngIf="data.mode=='sexuelDetails'">
+  <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span> Modification Détails Sexuels </span>
+  </mat-toolbar>
+
+  <form #f="ngForm" [formGroup]="detailSexuelForm" (ngSubmit)="saveDetailsSexuel(f.value)">
+
+    <div>
+      <mat-form-field>
+        <mat-select matInput type="text"  title="orientationSexuelle" formControlName="orientationSexuelle" id="orientationSexuelle" name="orientationSexuelle" placeholder="Votre orientation sexuelle!"
+        [ngClass]="{'is-invalid':detailSexuelForm.get('orientationSexuelle').touched && detailSexuelForm.get('orientationSexuelle').invalid }"
+        >
+        <mat-option value="heterosexuelle">Hétérosexuelle</mat-option>
+        <mat-option value="bisexuelle">Bisexuelle</mat-option>
+        <mat-option value="lesbienne">Lesbiene</mat-option>
+        </mat-select>
+        <mat-hint *ngIf="orientationSexuelle.invalid && (orientationSexuelle.dirty || orientationSexuelle.touched)">l'orientation sexuelle est obligatoire!</mat-hint>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="detailSexuelForm.invalid">Valider</button>
+    </div>
+  </form>
+</div>
+
+
+<div  *ngIf="data.mode=='aProposDeMoi'">
+  <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span> Modification À propos de moi </span>
+  </mat-toolbar>
+
+  <form #f="ngForm" [formGroup]="aProposDeMoiForm" (ngSubmit)="saveApropos(f.value)">
+<div>
+  <mat-form-field >
+    <mat-label>À propos de moi</mat-label>
+    <textarea matInput
+    type="textarea" formControlName="aProposDeMoiText" id="aProposDeMoiText" name="aProposDeMoiText" placeholder="À propos de moi"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="20"
+              [ngClass]="{'is-invalid':aProposDeMoiForm.get('aProposDeMoiText').touched && aProposDeMoiForm.get('aProposDeMoiText').invalid }"
+              ></textarea>
+    <mat-hint *ngIf="aProposDeMoiText.invalid && (aProposDeMoiText.dirty || aProposDeMoiText.touched)">À propos de moi est obligatoire!</mat-hint>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+</div>
+
+<div>
+  <button mat-raised-button color="primary" type="submit" [disabled]="aProposDeMoiForm.invalid">Valider</button>
+</div>
+  </form>
+
+</div>
+
+
+<div  *ngIf="data.mode=='coordonnees'">
+  <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span> Modification Des coordonnées </span>
+  </mat-toolbar>
+
+  <form #f="ngForm" [formGroup]="coordonneesForm" (ngSubmit)="saveCoordonnees(f.value)">
+<div>
+  <mat-form-field>
+    <mat-select matInput type="text"  title="ville" formControlName="ville" id="ville" name="ville" placeholder="Votre ville d'activité !"
+    [ngClass]="{'is-invalid':coordonneesForm.get('ville').touched && coordonneesForm.get('ville').invalid }"
+    >
+    <mat-option value="" selected disabled>Choisir votre Ville d'activité</mat-option>
+    <mat-option *ngFor="let v of villes" value="{{v.nomVille}}">{{v.nomVille}}</mat-option>
+    </mat-select>
+    <mat-hint *ngIf="ville.invalid && (ville.dirty || ville.touched)">la ville d'activité est obligatoire!</mat-hint>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-form-field>
+    <mat-label>Numéro de téléphone</mat-label>
+    <input matInput type="text" id="numeroTel" title="numeroTel" formControlName="numeroTel" name="numeroTel" placeholder="Votre Numéro de téléphone!"
+    [ngClass]="{'is-invalid':coordonneesForm.get('numeroTel').touched && coordonneesForm.get('numeroTel').invalid }"
+    >
+    <mat-hint *ngIf="numeroTel.hasError('required')">le numéro de téléphone est obligatoire!</mat-hint>
+    <mat-hint *ngIf ="numeroTel.hasError('pattern')" >format de numéro de téléphone invalide! </mat-hint>
+    <mat-hint *ngIf ="numeroTel.hasError('maxLength')" >numéro de tél trop long! </mat-hint>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+</div>
+
+
+
+<div>
+  <mat-form-field>
+    <mat-label>Site Web</mat-label>
+    <input matInput type="siteWeb" id="siteWeb" title="siteWeb" formControlName="siteWeb" name="siteWeb" placeholder="Votre site web"
+    [ngClass]="{'is-invalid':coordonneesForm.get('siteWeb').touched && coordonneesForm.get('siteWeb').invalid }"
+    >
+    <mat-hint *ngIf="siteWeb.invalid && (siteWeb.dirty || siteWeb.touched)">le site web est obligatoire!</mat-hint>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+</div>
+
+
+<div>
+  <button mat-raised-button color="primary" type="submit" [disabled]="coordonneesForm.invalid">Valider</button>
+</div>
+  </form>
+</div>
+<div  *ngIf="data.mode=='galerie'">
+  <mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span> Modification De la Galerie photos </span>
+  </mat-toolbar>
+  <form #f="ngForm" [formGroup]="galerieForm" (ngSubmit)="savePicture(f.value)">
+    <mat-card class="example-card">
+     <div mdbBtn rounded="true" outline="true" color="info" mdbWavesEffect>
+      <input id="photo" formControlName="photo" type="file" accept=".jpg" 
+      [ngClass]="{'is-invalid':galerieForm.get('photo').touched && galerieForm.get('photo').invalid }" (change)= "onFileChanged($event)" appFileValidaator > 
+   </div>
+   <div>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint *ngIf="photo.invalid && (photo.dirty || photo.touched)">une photo est obligatoire!</mat-hint>
+   </div>
+   <div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="galerieForm.invalid">Valider</button>
+  </div>
+    </mat-card>
+    
+  </form>
+</div>

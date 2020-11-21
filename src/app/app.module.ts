@@ -76,10 +76,49 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { AboutUsComponentComponent } from './about-us-component/about-us-component.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
+import { AdminNationaliteComponent } from './admin-nationalite/admin-nationalite.component';
+import { UniqueNationaliteValidatorDirective } from './shared/unique-nationalite-validator.directive';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { frLocale } from 'ngx-bootstrap/locale';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import {FullCalendarModule} from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { NewEventComponent } from './new-event/new-event.component';
+import { EndDateValidatorDirective } from './shared/end-date-validator.directive';
+import { TwoHoursValidatorDirective } from './shared/two-hours-validator.directive';
+import { CurrentDateValidatorDirective } from './shared/current-date-validator.directive';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { IdentificationClientComponent } from './identification-client/identification-client.component';
+import { LoginClientComponent } from './login-client/login-client.component';
+import { RegisterClientComponent } from './register-client/register-client.component';
+import { ProfileClientComponent } from './profile-client/profile-client.component';
+import { UniqueMailClientValidatorDirective } from './shared/unique-mail-client-validator.directive';
+import { UniqueUsernameClientValidatorDirective } from './shared/unique-username-client-validator.directive';
+import { ConfirmationReservationComponent } from './confirmation-reservation/confirmation-reservation.component';
+import { EndReservationComponent } from './end-reservation/end-reservation.component';
+import { DemandesComponent } from './demandes/demandes.component';
+import { DecisionDialogComponent } from './decision-dialog/decision-dialog.component';
+import { TestDraggableComponent } from './test-draggable/test-draggable.component';
+import { PaymentComponent } from './payment/payment.component';
+
+defineLocale('fr',frLocale);
+
 const routes : Routes =[
   {path:"products/:urlProds",component:ProductsComponent}
 ]
-
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin
+])
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,7 +142,31 @@ const routes : Routes =[
     ValidationInscriptionComponent,
     UniqueMailValidatorDirective,
     NavComponent,
-    AboutUsComponentComponent
+    AboutUsComponentComponent,
+    MyProfileComponent,
+    EditMyProfileComponent,
+    AdminNationaliteComponent,
+    UniqueNationaliteValidatorDirective,
+    HomeComponent,
+    ProfileComponent,
+    NewEventComponent,
+    EndDateValidatorDirective,
+    TwoHoursValidatorDirective,
+    CurrentDateValidatorDirective,
+    AppointmentsComponent,
+    PageNotFoundComponent,
+    IdentificationClientComponent,
+    LoginClientComponent,
+    RegisterClientComponent,
+    ProfileClientComponent,
+    UniqueMailClientValidatorDirective,
+    UniqueUsernameClientValidatorDirective,
+    ConfirmationReservationComponent,
+    EndReservationComponent,
+    DemandesComponent,
+    DecisionDialogComponent,
+    TestDraggableComponent,
+    PaymentComponent
     
   ],
   imports: [
@@ -113,6 +176,7 @@ const routes : Routes =[
     CommonModule, FormsModule, 
     ReactiveFormsModule,
     NgxPaginationModule,
+    BsDatepickerModule.forRoot()  ,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatMenuModule, 
@@ -159,10 +223,14 @@ const routes : Routes =[
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    NgbModule,
+    FullCalendarModule
+    
 
   ],
   providers: [AppComponent],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

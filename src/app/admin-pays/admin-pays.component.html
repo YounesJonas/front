@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Administration Pays et Ville</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,8 +9,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<div class="container">
+<app-nav></app-nav>
+<div class="container" *ngIf="authentifie==true">
   <h2>Managment Pays </h2>
   <p>Des escorts dans le monde entier!</p>
 
@@ -331,6 +331,8 @@
 
 </div>
 </div>
-
+<div *ngIf="authentifie==false">
+ Vous n'êtes pas connecté(e)s, Veuillez vous Authentifier sur<a mat-button  routerLink="/login" color ='accent'>Login</a>
+</div>
 </body>
 </html>

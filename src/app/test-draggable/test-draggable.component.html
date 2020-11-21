@@ -1,0 +1,42 @@
+<div id='external-events'>
+    <p>
+      <strong>Disponibilités</strong>
+    </p>
+  <tr *ngFor="let d of this.disponibilities"> 
+    <td>
+        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+            <div class='fc-event-main'>{{d.title}}</div>
+          </div>
+            
+          
+    </td>
+  </tr>
+  <!--
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+      <div class='fc-event-main'>My Event 1</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+      <div class='fc-event-main'>My Event 2</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+      <div class='fc-event-main'>My Event 3</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+      <div class='fc-event-main'>My Event 4</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+      <div class='fc-event-main'>My Event 5</div>
+    </div>
+  -->
+
+  
+    <p>
+      <input type='checkbox' id='drop-remove' />
+      <label for='drop-remove'>remove after drop</label>
+    </p>
+  </div>
+  
+  <div id='calendar-container'>
+    <full-calendar #fullcalendar  defaultView="dayGridDay"  [options]="calendarOptions" ></full-calendar>
+    <div id='calendar'></div>
+  </div>

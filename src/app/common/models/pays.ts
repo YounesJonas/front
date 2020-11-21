@@ -1,4 +1,4 @@
-import { Abstract } from './Abstract';
+
 
 export class Pays  {
 

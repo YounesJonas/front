@@ -8,6 +8,11 @@ import { CityString } from '../common/models/cityString';
 import { Escort } from '../common/models/escort';
 import { ReturnCodeObject } from '../common/models/returnCodeObject';
 import { uniqueMailValidator } from '../shared/unique-mail-validator.directive';
+import { Nationalite } from '../common/models/Nationalite';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
+
 
 @Component({
   selector: 'app-register',
@@ -20,10 +25,17 @@ public villes: Array<Ville>;
 public escort: Escort;
 public message: string;
 public inscriptionReussite: boolean;
+public nationalites: Array<Nationalite>;
+public bsConfig: Partial<BsDatepickerConfig>;
+public colorTheme = 'theme-dark-blue';
+public locale: string;
+public maxDate: Date;
+public yearMax: number;
 
   constructor(
     private fb: FormBuilder,
-    private dataService: EscortService
+    private dataService: EscortService,
+    private localeService: BsLocaleService
   ) { 
     
   }
@@ -38,8 +50,37 @@ public inscriptionReussite: boolean;
         this.villes = data;
       }
     )
+      // get nationalites
+      this.dataService.getAllNationalites().then(
+       (data: Array<Nationalite> ) =>{
+         this.nationalites = data;
+       }
+      )
+
+      this.bsConfig = Object.assign({}, {
+         containerClass: this.colorTheme,
+         showWeekNumbers: false,
+         dateInputFormat: 'DD/MM/YYYY'
+      
+      });
+      this.locale = 'fr';
+      this.localeService.use(this.locale);
+      this.maxDate = new Date();
+      console.log("la date actuelle " + this.maxDate);
+      console.log(" value of full year " + this.maxDate.getFullYear());
+      this.yearMax = (this.maxDate.getFullYear()) - 18;
+      console.log("year max " + this.yearMax);
+      
+      this.maxDate.setFullYear(this.yearMax);
+
+      console.log("la date max authorisee " + this.maxDate);
+     
+     
+      
+      
   }
 
+ 
 
   createForm() {
     this.registerForm = this.fb.group(
@@ -53,14 +94,20 @@ public inscriptionReussite: boolean;
           Validators.required],
         lastname: ['',
           Validators.required],
+          
         
-        email: [null, [Validators.required, Validators.email],
+        mail: [null, [Validators.required, Validators.email],
           uniqueMailValidator(this.dataService)
          
         ],
+        dateNaissance: ['',
+          Validators.required],
         ville: ['',
           Validators.required],
-          
+        nationalite: [
+          '',
+          Validators.required
+        ],
         password: ['',
           Validators.required],
         password2: ['',
@@ -88,8 +135,8 @@ public inscriptionReussite: boolean;
   get lastname() {
     return this.registerForm.get('lastname');
   }
-  get email() {
-    return this.registerForm.get('email');
+  get mail() {
+    return this.registerForm.get('mail');
   }
 
   get ville(){
@@ -100,10 +147,20 @@ public inscriptionReussite: boolean;
     return this.registerForm.get('sexe');
   }
 
+  get nationalite(){
+    return this.registerForm.get('nationalite');
+  }
+
+  get dateNaissance(){
+    return this.registerForm.get('dateNaissance');
+  }
+
   register = (event: Event) => {
     console.log(event);
     event.preventDefault();
     this.fillEscortFromForm();
+    console.log("debug escort " + this.escort.mail);
+    
     this.dataService.register(this.escort).subscribe(
       (data: ReturnCodeObject) => {
         console.log(data.returnCode);
@@ -125,10 +182,15 @@ fillEscortFromForm = () => {
     this.escort.setFirstname(this.registerForm.value.firstname);
     this.escort.setUsername(this.registerForm.value.username);
     this.escort.setLastname(this.registerForm.value.lastname);
-    this.escort.setEmail(this.registerForm.value.email);
+    this.escort.setNationalite(this.registerForm.value.nationalite.nationalite);
+    this.escort.setMail(this.registerForm.value.mail);
     this.escort.setNomVille(this.registerForm.value.ville.nomVille);
     this.escort.setSexe(this.registerForm.value.sexe);
     this.escort.setPassword(this.registerForm.value.password); 
+    //debug 
+    console.log("debug mail " + this.registerForm.value.mail);
+    
+    this.escort.setDateDeNaissance(this.registerForm.value.dateNaissance);
   }
 
   

@@ -1,0 +1,66 @@
+<html>
+    
+    <head></head>
+    <body>
+        <app-nav>
+        
+        </app-nav>
+        <div>
+            <mat-card>
+                <mat-card-content>
+                  <h2 class="accent">Identification</h2>
+              
+                  <section class="example-section">
+                    <mat-progress-bar
+                        class="example-margin"
+                        color= "primary"
+                        mode="determinate"
+                        value=40
+                        >
+                        
+                    </mat-progress-bar>
+                    
+                  </section>
+            
+                  
+                </mat-card-content>
+              </mat-card>
+
+              <mat-card class="example-card">
+                <div class="container mt-2" >
+                    <div class="row app-container pt-2 pb-2" >
+                        <div class="col-lg-10 offset-md-1" >
+                <div class="card" mb-2>
+                    <div class="card-body">
+                      <h5 class="card-title">Déjà Membre de Escort Girl ?</h5>
+                      <p class="card-text">Veuillez vous authentifier svp !</p>
+                      <button mat-raised-button color="primary" (click)="login()" >Login Client</button>
+                      
+                    </div>
+                  </div>
+                </div>
+            </div>
+                </div>
+            </mat-card>
+            <mat-card>
+                <div class="container mt-2" >
+                    <div class="row app-container pt-2 pb-2" >
+                        <div class="col-lg-10 offset-md-1" >
+                <div class="card" mb-2>
+                    <div class="card-body">
+                      <h5 class="card-title">Nouveau Membre de Escort Girl ?</h5>
+                      <p class="card-text">Inscription Simple, discrète et gratuite</p>
+                      <button mat-raised-button color="accent" (click)="signUp()" >Sign up Client</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+                </div>
+              </mat-card>
+              
+        </div>
+        
+       
+    </body>
+    
+</html>

@@ -1,0 +1,57 @@
+<div>
+    <form #f="ngForm" [formGroup]="newEventForm" (ngSubmit)="saveEvent(f.value)">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Nom de l'évènement</label>
+                <input type="text" class="form-control" id="title" formControlName="title" name="title" placeholder="Entrez le nom de l'évènement" (change)="deleteErrorMessage()">
+                <div class="text-danger" *ngIf="title.invalid && (title.dirty || title.touched)">
+                    <div *ngIf ="title.errors['required']" >le titre est obligatoire!</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>date de début</label>
+                <input type="datetime-local" min = {{dateMin}} class="form-control" formControlName="startDate" name="startDate" placeholder="Entrez le nom de l'évènement">
+                <div class="text-danger"
+                *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)">
+                <div *ngIf="startDate.errors['required']">
+                    la date de début est obligatoire!
+                </div>
+        
+                 <div *ngIf="startDate.errors['appCurrentDateValidator']">
+                    la date de début doit être dans le futur !
+                 </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <label>date de fin</label>
+                <input type="datetime-local" class="form-control" name="endDate" 
+                min = {{dateMin}}
+                formControlName="endDate" placeholder="Entrez la date de fin" >
+                <div class="text-danger"
+                *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)">
+                <div *ngIf="endDate.errors['required']">
+                    la date de fin est obligatoire!
+                </div>
+        
+                <div *ngIf="endDate.errors['appEndDateValidator']">
+                   la date de fin doit être plus tard que la date de début 
+                </div>
+                
+                <div *ngIf="endDate.errors['appTwoHoursValidator']">
+                    la durée d'un câlin doit pas dépasser 2 heures!
+                 </div>
+                 <div *ngIf="endDate.errors['appCurrentDateValidator']">
+                    la date de fin doit être dans le futur !
+                 </div>
+            </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" [disabled]="newEventForm.invalid" class="btn btn-primary">Enregistrer</button>
+            <div class="text-danger"*ngIf="ch!=undefined">
+                {{ch}}
+            </div>
+        </div>
+    </form>
+</div>

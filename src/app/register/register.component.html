@@ -66,6 +66,31 @@
        
       </div>
 
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="dateNaissance">Date de Naissance:</label>
+        <div class="col-sm-10"> 
+          <input type="text" bsDatepicker  onkeydown="return false"[bsConfig]="bsConfig" [maxDate]="maxDate"  class="form-control"  formControlName="dateNaissance"  id="dateNaissance" placeholder="Entrer votre date de naissance " name="dateNaissance">
+        <div class="text-danger" *ngIf="dateNaissance.invalid && (dateNaissance.dirty || dateNaissance.touched)">
+          <div *ngIf ="dateNaissance.errors['required']" >la date de Naissance est obligatoire!</div>
+          
+          
+         </div>
+            </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="nationalite">Nationalité:</label>
+        <div class="col-sm-10"> 
+          <select formControlName="nationalite" id="nationalite" class="form-control">
+            <option value="" selected disabled>Choisir votre Nationalité</option>
+            <option *ngFor="let n of nationalites" [ngValue]="n">{{n.nationalite}}</option>
+        </select>
+        <div class="text-danger" *ngIf="nationalite.invalid && (nationalite.dirty || nationalite.touched)">
+            la nationalité est obligatoire!
+    
+         </div>
+            </div>
+      </div>
 
 
 
@@ -73,17 +98,17 @@
       <div class="form-group">
         <label class="control-label col-sm-2" for="email">Email:</label>
         <div class="col-sm-10">          
-          <input type="email" class="form-control" formControlName="email" id="email" placeholder="Entrer Email" name="email"
-          [ngClass]="{'is-invalid':registerForm.get('email').touched && registerForm.get('email').invalid }" uniqueMail>
-          <div *ngIf=" registerForm.get('email').touched && registerForm.get('email').invalid"
+          <input type="email" class="form-control" formControlName="mail" id="mail" placeholder="Entrer Email" name="mail"
+          [ngClass]="{'is-invalid':registerForm.get('mail').touched && registerForm.get('mail').invalid }" uniqueMail>
+          <div *ngIf=" registerForm.get('mail').touched && registerForm.get('mail').invalid"
           class="text-danger">
-          <div *ngIf="registerForm.get('email').errors.required">
+          <div *ngIf="registerForm.get('mail').errors.required">
               un mail est obligatoire!
           </div>
-          <div *ngIf="registerForm.get('email').errors.email">
+          <div *ngIf="registerForm.get('mail').errors.email">
              Veuillez svp Entrer une adresse mail valide !
           </div>
-          <div *ngIf ="email.errors['uniqueMail']">Cette adresse mail existe déjà </div>
+          <div *ngIf ="mail.errors['uniqueMail']">Cette adresse mail existe déjà </div>
       </div>
         </div>
 

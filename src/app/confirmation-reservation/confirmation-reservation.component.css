@@ -1,0 +1,13 @@
+.appointment-not-confirmed {
+    font-size: 20px;
+    padding: 0 16px;
+}
+
+.dl-font-700 {
+    font-weight: 700 !important;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}

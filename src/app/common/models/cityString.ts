@@ -1,6 +1,4 @@
-import { Abstract } from './Abstract';
-
-export class CityString extends Abstract{
+export class CityString {
     public nomVille: String;
     public codePostal: Number;
 

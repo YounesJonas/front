@@ -1,0 +1,26 @@
+.icon-text {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    text-indent: 50px;
+    text-align: justify;
+    letter-spacing: 3px;
+  }
+
+
+.material-icons.mdc-button__icon {
+    background: blue;
+    color: aliceblue;
+}
+
+.mat-icon-button {
+
+  position: relative;
+  left: 230px;
+}
+
+.icon-text.span{
+    color:blue;
+}

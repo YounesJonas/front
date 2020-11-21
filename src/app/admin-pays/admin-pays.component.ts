@@ -10,6 +10,7 @@ import { FileValidaator } from '../shared/file-validaator.directive';
 import { uniqueCityValidator } from '../shared/unique-city-validator.directive';
 import { uniqueCodePostalValidator } from '../shared/unique-code-postal-validator.directive';
 import { NavbarServiceService } from '../shared/navbar-service.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-admin-pays',
@@ -21,6 +22,8 @@ public uploadForm: FormGroup;
 public updateForm: FormGroup;
 public cityForm: FormGroup;
 public cityUpdateForm: FormGroup;
+authentifie:boolean;
+jwt;
 pays;
 villes;
 photo;
@@ -44,11 +47,17 @@ totalCity: number;
 pageCity:number=1;
   constructor(private paysService:PaysService,private route:ActivatedRoute,private router:Router
     , private fb: FormBuilder,
-    public navService: NavbarServiceService
+    public navService: NavbarServiceService,
+    public authenticationService: AuthenticationService
     ) { }
 
   ngOnInit(): void {
-
+    this.jwt = localStorage.getItem('tocken');
+    console.log(this.jwt);
+    
+    this.authentifie = this.isAuthenticated();
+    console.log("authentifie"+this.authentifie);
+    
     this.navService.show();
 
     this.uploadForm = this.fb.group(
@@ -368,6 +377,7 @@ getCities(id){
     {
      
       this.villes = data;
+      console.log("les villes de pays "+id+" sont " + JSON.stringify(data));
       console.log(this.villes.length);
       this.totalCity=this.villes.length;
      
@@ -434,6 +444,10 @@ saveCity(data){
     }
   )
   
+}
+
+isAuthenticated = (): boolean =>{
+return this.authenticationService.isAuthenticated2();
 }
 
 }

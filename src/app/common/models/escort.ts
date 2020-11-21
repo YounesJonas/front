@@ -1,11 +1,36 @@
+import { Photo } from './photo';
+
 export class Escort {
     public username: String;
     public firstname: String;
     public lastname: String;
-    public email: String;
+    public nomUtilisateur: String;
+    public numeroTel: String;
+    public age: Number;
+    public taille: Number;
+    public poids: Number;
+    public description: String;
+    public orientationSexuelle: String;
+    public aProposDeMoi: String;
+    public nationalite: String;
+    public yeux: String;
+    public cheveux: String;
+    public mail: String;
     public nomVille: String;
     public sexe: String;
     public password: String;
+    public dateDeNaissance: Date;
+    public siteUrl: String;
+    public pictures: Array<Photo>;
+    getDateDeNaissance =() =>{
+        return this.dateDeNaissance;
+    }
+
+    setDateDeNaissance = (dateDeNaissance: Date) =>{
+        this.dateDeNaissance = dateDeNaissance;
+    }
+
+
 
     getUsername =() =>{
         return this.username;
@@ -19,6 +44,7 @@ export class Escort {
         return this.firstname;
     }
 
+
     setFirstname = (firstname: String) =>{
         this.firstname = firstname;
     }
@@ -29,12 +55,21 @@ export class Escort {
     setLastname = (lastname: String) =>{
         this.lastname = lastname;
     }
-    getEmail =() =>{
-        return this.email;
+
+    getNationalite =() =>{
+        return this.nationalite;
     }
 
-    setEmail = (email: String) =>{
-        this.email = email;
+    setNationalite = (nationalite: String) =>{
+        this.nationalite = nationalite;
+    }
+
+    getMail =() =>{
+        return this.mail;
+    }
+
+    setMail = (mail: String) =>{
+        this.mail = mail;
     }
     getNomPaVille =() =>{
         return this.nomVille;
@@ -57,4 +92,10 @@ export class Escort {
     setPassword = (password: String) =>{
         this.password = password;
     }
+
+    getTaille =() =>{
+        return this.taille;
+    }
+
+   
 }

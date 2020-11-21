@@ -1,6 +1,6 @@
-import { Abstract } from './Abstract';
 
-export class Username extends Abstract{
+
+export class Username{
     public username: String;
 
     getUsername = () =>{

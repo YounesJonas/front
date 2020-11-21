@@ -1,6 +1,6 @@
-import { Abstract } from './Abstract';
 
-export class ReturnCodeObject extends Abstract {
+
+export class ReturnCodeObject {
 
     public returnCode: String;
 

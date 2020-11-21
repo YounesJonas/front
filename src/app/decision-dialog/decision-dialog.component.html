@@ -1,0 +1,31 @@
+<div>
+    <mat-toolbar>
+      <span class="fill-remaining-space"></span>
+      <span> Décision sur la demande de rendez-vous </span>
+    </mat-toolbar>
+    <form #f="ngForm" [formGroup]="decisionForm" (ngSubmit)="saveDate(f.value)">
+  
+     
+  
+   
+    
+    <div>
+      <mat-form-field>
+        <mat-select matInput type="text"  title="decision" formControlName="decision" id="decision" name="decision" placeholder="décision!"
+        [ngClass]="{'is-invalid':decisionForm.get('decision').touched && decisionForm.get('decision').invalid }"
+        >
+        <mat-option value="validee">Rendez-vous Validé</mat-option>
+          <mat-option value="refusee">Rendez-vous Annulé</mat-option>
+
+        </mat-select>
+        <mat-hint *ngIf="decision.invalid && (decision.dirty || decision.touched)">votre décision est obligatoire!</mat-hint>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </div>
+    
+    <div>
+      <button mat-raised-button color="accent" type="submit" [disabled]="decisionForm.invalid">Répondre</button>
+    </div>
+    </form>
+   
+  </div>
